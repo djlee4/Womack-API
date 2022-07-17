@@ -1,6 +1,8 @@
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { join } from 'path';
 import { PartsModule } from './parts/parts.module';
 
 
@@ -8,7 +10,16 @@ import { PartsModule } from './parts/parts.module';
   imports: [
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
-      autoSchemaFile: true}),
+      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+    }),
+    TypeOrmModule.forRoot({
+      type: 'mysql',
+      host: 'localhost',
+      username: 'root',
+      password: 'root',
+      database: 'partsDB',
+      entities: ['dist/**/*.entity{.ts,.js}'],
+    }),
     PartsModule,
     ],
   controllers: [],

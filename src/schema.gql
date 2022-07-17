@@ -1,0 +1,35 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Part {
+  id: Int!
+  barcode: String!
+  quantity: Int!
+  description: String!
+  brand: String!
+  hasCore: Boolean!
+  price: Float
+  category: String
+  type: String
+}
+
+type Query {
+  parts: [Part!]!
+}
+
+type Mutation {
+  createPart(createPartInput: CreatePartInput!): Part!
+}
+
+input CreatePartInput {
+  id: Int!
+  barcode: String!
+  quantity: Int!
+  description: String!
+  brand: String!
+  hasCore: Boolean!
+  price: Float
+  category: String
+  type: String
+}
