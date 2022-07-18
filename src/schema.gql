@@ -2,34 +2,81 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type PartCategory {
+  id: String!
+  name: String!
+}
+
+type PartType {
+  id: String!
+  name: String!
+}
+
+type PartBrand {
+  id: String!
+  name: String!
+}
+
 type Part {
-  id: Int!
+  id: String!
+  name: String!
   barcode: String!
   quantity: Int!
   description: String!
-  brand: String!
+  brand: [PartBrand!]!
   hasCore: Boolean!
-  price: Float
-  category: String
-  type: String
+  price: Int
+  category: [PartCategory!]
+  type: [PartType!]
 }
 
 type Query {
   parts: [Part!]!
+  part(id: Int!): Part!
 }
 
 type Mutation {
   createPart(createPartInput: CreatePartInput!): Part!
+  updatePart(updatePartInput: UpdatePartInput!): Part!
+  removePart(id: Int!): Part!
 }
 
 input CreatePartInput {
-  id: Int!
+  name: String!
   barcode: String!
   quantity: Int!
   description: String!
-  brand: String!
+  brand: [CreatePartBrand!]!
   hasCore: Boolean!
-  price: Float
-  category: String
-  type: String
+  price: Int
+  category: [CreatePartCategory!]
+  type: [CreatePartType!]
+}
+
+input CreatePartBrand {
+  id: String!
+  name: String!
+}
+
+input CreatePartCategory {
+  id: String!
+  name: String!
+}
+
+input CreatePartType {
+  id: String!
+  name: String!
+}
+
+input UpdatePartInput {
+  name: String
+  barcode: String
+  quantity: Int
+  description: String
+  brand: [CreatePartBrand!]
+  hasCore: Boolean
+  price: Int
+  category: [CreatePartCategory!]
+  type: [CreatePartType!]
+  id: Int!
 }
