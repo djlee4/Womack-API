@@ -32,7 +32,7 @@ export class CreatePartInput {
   @Field()
   description: string;
 
-  @Field(() => [CreatePartBrand])
+  @Field(() => CreatePartBrand)
   brand: CreatePartBrand;
 
   @Field(() => Boolean)
@@ -41,9 +41,9 @@ export class CreatePartInput {
   @Field(() => Int, { nullable: true })
   price?: number;
 
-  @Field(() => [CreatePartCategory], { nullable: true })
+  @Field(() => CreatePartCategory, { nullable: true })
   category?: CreatePartCategory;
 
-  @Field(() => [CreatePartType], { nullable: true })
+  @Field(() => CreatePartType, { nullable: true })
   type?: CreatePartType;
 }

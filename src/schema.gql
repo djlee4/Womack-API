@@ -46,11 +46,11 @@ input CreatePartInput {
   barcode: String!
   quantity: Int!
   description: String!
-  brand: [CreatePartBrand!]!
+  brand: CreatePartBrand!
   hasCore: Boolean!
   price: Int
-  category: [CreatePartCategory!]
-  type: [CreatePartType!]
+  category: CreatePartCategory
+  type: CreatePartType
 }
 
 input CreatePartBrand {
@@ -70,10 +70,10 @@ input UpdatePartInput {
   barcode: String
   quantity: Int
   description: String
-  brand: [CreatePartBrand!]
+  brand: CreatePartBrand
   hasCore: Boolean
   price: Int
-  category: [CreatePartCategory!]
-  type: [CreatePartType!]
+  category: CreatePartCategory
+  type: CreatePartType
   id: Int!
 }
