@@ -1,34 +1,49 @@
-import { Field, InputType, Int } from "@nestjs/graphql";
+import { Field, Int, InputType } from '@nestjs/graphql';
+
+@InputType()
+export class CreatePartCategory {
+  @Field()
+  name: string;
+}
+
+@InputType()
+export class CreatePartType {
+  @Field()
+  name: string;
+}
+
+@InputType()
+export class CreatePartBrand {
+  @Field()
+  name: string;
+}
 
 @InputType()
 export class CreatePartInput {
-    @Field(type => Int)
-    id:number;
+  @Field()
+  name: string;
 
-    @Field()
-    barcode:string;
+  @Field()
+  barcode: string;
 
-    @Field(type => Int)
-    quantity:number;
+  @Field(() => Int)
+  quantity: number;
 
-    @Field()
-    description:string;
+  @Field()
+  description: string;
 
-    @Field()
-    brand:string;
+  @Field(() => CreatePartBrand)
+  brand: CreatePartBrand;
 
-    @Field(type => Boolean)
-    hasCore:boolean;
+  @Field(() => Boolean)
+  hasCore: boolean;
 
-    
-    @Field({nullable: true})
-    price?:number; 
+  @Field(() => Int, { nullable: true })
+  price?: number;
 
-    
-    @Field({nullable: true})
-    category?:string;
+  @Field(() => CreatePartCategory, { nullable: true })
+  category?: CreatePartCategory;
 
-    
-    @Field({nullable: true})
-    type?:string;
+  @Field(() => CreatePartType, { nullable: true })
+  type?: CreatePartType;
 }

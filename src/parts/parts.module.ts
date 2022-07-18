@@ -1,11 +1,10 @@
 import { Module } from '@nestjs/common';
 import { PartsService } from './parts.service';
 import { PartsResolver } from './parts.resolver';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { Part } from './parts.entity';
+import { HttpModule } from '@nestjs/axios';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Part])],
-  providers: [PartsService, PartsResolver]
+  imports: [HttpModule],
+  providers: [PartsResolver, PartsService],
 })
 export class PartsModule {}

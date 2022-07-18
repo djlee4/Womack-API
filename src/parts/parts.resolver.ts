@@ -1,19 +1,37 @@
-import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { PartsService } from './parts.service';
-import { Part } from './parts.entity';
+import { Part } from './entities/part.entity';
 import { CreatePartInput } from './dto/create-part.input';
+import { UpdatePartInput } from './dto/update-part.input';
 
-@Resolver(of => Part)
+@Resolver(() => Part)
 export class PartsResolver {
-    constructor(private partsService: PartsService) {}
+  constructor(private readonly partsService: PartsService) {}
 
-    @Query(returns => [Part])
-    parts(): Promise<Part[]> {
-        return this.partsService.findAll();
-    }
+  @Mutation(() => Part)
+  createPart(@Args('createPartInput') createPartInput: CreatePartInput) {
+    return this.partsService.create(createPartInput);
+  }
 
-    @Mutation(returns => Part)
-    createPart(@Args('createPartInput')createPartInput: CreatePartInput): Promise<Part> {
-        return this.partsService.createPart(createPartInput);
-    }
+  @Query(() => [Part], { name: 'parts' })
+  async findAll() {
+    const parts = await this.partsService.findAll();
+    console.log(parts);
+    return parts;
+  }
+
+  @Query(() => Part, { name: 'part' })
+  findOne(@Args('id', { type: () => Int }) id: number) {
+    return this.partsService.findOne(id);
+  }
+
+  @Mutation(() => Part)
+  updatePart(@Args('updatePartInput') updatePartInput: UpdatePartInput) {
+    return this.partsService.update(updatePartInput.id, updatePartInput);
+  }
+
+  @Mutation(() => Part)
+  removePart(@Args('id', { type: () => Int }) id: number) {
+    return this.partsService.remove(id);
+  }
 }
