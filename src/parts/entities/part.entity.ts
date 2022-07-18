@@ -41,7 +41,7 @@ export class Part {
   @Field()
   description: string;
 
-  @Field(() => [PartBrand])
+  @Field(() => PartBrand)
   brand: PartBrand;
 
   @Field(() => Boolean)
@@ -50,9 +50,9 @@ export class Part {
   @Field(() => Int, { nullable: true })
   price?: number;
 
-  @Field(() => [PartCategory], { nullable: true })
+  @Field(() => PartCategory, { nullable: true })
   category?: PartCategory;
 
-  @Field(() => [PartType], { nullable: true })
+  @Field(() => PartType, { nullable: true })
   type?: PartType;
 }

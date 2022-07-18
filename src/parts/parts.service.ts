@@ -1,10 +1,11 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
+import { createDeflate } from 'zlib';
 import { CreatePartInput } from './dto/create-part.input';
 import { UpdatePartInput } from './dto/update-part.input';
 import { Part } from './entities/part.entity';
 
-export const databaseURL = 'http://localhost:5100/parts';
+export const databaseURL = 'http://localhost:5100';
 
 @Injectable()
 export class PartsService {
@@ -17,7 +18,11 @@ export class PartsService {
   }
 
   async findAll(): Promise<Part[]> {
-    return await this.httpService.axiosRef.get(`${databaseURL}/parts`);
+    const { data } = await this.httpService.axiosRef.get(
+      `${databaseURL}/parts`,
+    );
+
+    return data;
   }
 
   findOne(id: number) {

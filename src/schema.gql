@@ -23,11 +23,11 @@ type Part {
   barcode: String!
   quantity: Int!
   description: String!
-  brand: [PartBrand!]!
+  brand: PartBrand!
   hasCore: Boolean!
   price: Int
-  category: [PartCategory!]
-  type: [PartType!]
+  category: PartCategory
+  type: PartType
 }
 
 type Query {
@@ -54,17 +54,14 @@ input CreatePartInput {
 }
 
 input CreatePartBrand {
-  id: String!
   name: String!
 }
 
 input CreatePartCategory {
-  id: String!
   name: String!
 }
 
 input CreatePartType {
-  id: String!
   name: String!
 }
 

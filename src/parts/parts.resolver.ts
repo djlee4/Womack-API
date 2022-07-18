@@ -14,8 +14,10 @@ export class PartsResolver {
   }
 
   @Query(() => [Part], { name: 'parts' })
-  findAll() {
-    return this.partsService.findAll();
+  async findAll() {
+    const parts = await this.partsService.findAll();
+    console.log(parts);
+    return parts;
   }
 
   @Query(() => Part, { name: 'part' })
