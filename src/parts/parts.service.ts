@@ -12,9 +12,16 @@ export class PartsService {
   constructor(private readonly httpService: HttpService) {}
 
   async create(createPartInput: CreatePartInput): Promise<Part> {
-    return await this.httpService.axiosRef.post('/parts', createPartInput, {
-      baseURL: databaseURL,
-    });
+    const { data } = await this.httpService.axiosRef.post(
+      '/parts',
+      createPartInput,
+      {
+        baseURL: databaseURL,
+      },
+    );
+
+    console.log(data);
+    return data;
   }
 
   async findAll(): Promise<Part[]> {
