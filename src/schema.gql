@@ -33,6 +33,8 @@ type Part {
 type Query {
   parts: [Part!]!
   part(id: Int!): Part!
+  findByBarcode(barcode: String!): Part!
+
 }
 
 type Mutation {

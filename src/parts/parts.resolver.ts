@@ -25,6 +25,12 @@ export class PartsResolver {
     return this.partsService.findOne(id);
   }
 
+  @Query(() => Part, { name: 'findByBarcode' })
+  findBarcode(@Args('barcode') barcode: string) {
+    console.log(barcode);
+    return this.partsService.findByBarcode(barcode);
+  }
+
   @Mutation(() => Part)
   updatePart(@Args('updatePartInput') updatePartInput: UpdatePartInput) {
     return this.partsService.update(updatePartInput.id, updatePartInput);
