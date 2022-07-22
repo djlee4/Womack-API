@@ -43,4 +43,12 @@ export class PartsService {
   remove(id: number) {
     return `This action removes a #${id} part`;
   }
+
+  async findByBarcode(barcode: string): Promise<Part> {
+    const { data } = await this.httpService.axiosRef.get(
+      `${databaseURL}/parts/barcode/${barcode}`,
+    );
+
+    return data;
+  }
 }
