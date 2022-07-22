@@ -48,5 +48,7 @@ export class PartsService {
     const { data } = await this.httpService.axiosRef.get(
       `${databaseURL}/parts/barcode/${barcode}`,
     );
+
+    return data;
   }
 }
